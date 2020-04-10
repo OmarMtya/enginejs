@@ -2,24 +2,35 @@ import { dibujar } from "./dibujar.js";
 import { Figura } from "./models/figura.class.js";
 import { Transform } from "./models/transform.class.js";
 import { Rigido } from "./models/rigido.class.js";
+import { Environment } from "./models/environment.class.js";
 
 let $ = (x) => document.querySelector(x);
-const c = {canvas: $("canvas").getContext("2d"), altura: 800, anchura: 1200};
-const figuras = [];
 
-figuras.push(new Figura({
+Environment.agregarFigura(new Figura({
     tipo: "circulo",
     transform: new Transform({
         x: 100,
         y: 100,
-        altura: 10,
-        anchura: 40
+        altura: 50
     }),
     rigido: new Rigido()
 }));
 
-dibujar(c, figuras);
-setInterval(() => {
-    dibujar(c, figuras);
-}, 30);
+Environment.agregarFigura(new Figura({
+    tipo: "cuadrado",
+    transform: new Transform({
+        x: 200,
+        y: 100,
+        altura: 100,
+        anchura: 100,
+        relleno: "#3142AB"
+    }),
+    rigido: new Rigido()
+}));
 
+
+dibujar();
+
+setInterval(() => {
+    dibujar();
+}, 1000 / Environment.FPS);

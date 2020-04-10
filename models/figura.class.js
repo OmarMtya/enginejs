@@ -1,3 +1,4 @@
+import { Environment } from "./environment.class.js";
 class Figura {
     constructor({tipo, transform, rigido = null, audio = null}){
         this.tipo = tipo;
@@ -7,10 +8,16 @@ class Figura {
     }
 
     afectarGravedad = function(){
-        console.log("Afectado");
         this.transform.y += this.rigido.valor;
-        console.log(this.transform.y);
         
+    }
+
+    tocandoFondo = function(){
+       let fondo = Environment.altura - this.transform.altura;
+       console.log(this.transform.altura);
+       if(this.transform.y > fondo){
+           this.transform.y = fondo;
+       }
     }
 }
 
