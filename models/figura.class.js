@@ -8,13 +8,13 @@ class Figura {
     }
 
     afectarGravedad = function(){
-        this.transform.y += this.rigido.valor;
+        console.log("ENTRO", this.transform.y);
         
+        this.transform.y += this.rigido.valor;
     }
 
     tocandoFondo = function(){
        let fondo = Environment.altura - this.transform.altura;
-       console.log(this.transform.altura);
        if(this.transform.y > fondo){
            this.transform.y = fondo;
        }
