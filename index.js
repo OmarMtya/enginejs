@@ -12,12 +12,12 @@ Environment.agregarFigura(new Figura({
     id: "azul",
     transform: new Transform({
         x: 360,
-        y: 500,
+        y: 200,
         altura: 20,
         anchura: 20,
         relleno: "#3142AB"
     }),
-    rigido: new Rigido()
+    rigido: new Rigido(15)
 }));
 
 
@@ -25,12 +25,12 @@ Environment.agregarFigura(new Figura({
     tipo: "cuadrado",
     id: "negro",
     transform: new Transform({
-        x: 350,
-        y: 600,
+        x: 360,
+        y: 300,
         altura: 50,
         anchura: 20,
     }),
-    rigido: new Rigido(5)
+    rigido: new Rigido()
 }));
 
 

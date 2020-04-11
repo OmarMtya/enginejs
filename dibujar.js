@@ -5,7 +5,30 @@ function Dibujar(){
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
     c.beginPath(); // Importante limpiar las líneas ya creadas
     
-    
+
+
+    Environment.figuras.sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas
+        if(a.transform.y > b.transform.y){
+            return -1;
+        }
+        if(a.transform.y < b.transform.y){
+            return 1;
+        }
+        return 0;
+    } ) .forEach(figura => { // Por cada figura creada, se redibuja
+        if (figura.rigido) {
+            if (!figura.rigido.sinColision) { // Si está definido el objeto como que si puede detectar colisiones
+                figura.tocandoRigidos();
+                if (!figura.rigido.colision) { // Si está en colisión, la gravedad no le afecta en un frame
+                    figura.afectarGravedad();
+                    figura.tocandoFondo();
+                }
+            } else {
+                figura.afectarGravedad();
+            }
+        }
+    });
+
     Environment.figuras.forEach((figura)=>{
         const transform = figura.transform;
         switch (figura.tipo) {
@@ -26,20 +49,7 @@ function Dibujar(){
         c.stroke();
     });
 
-    Environment.figuras.forEach(figura => { // Por cada figura creada, se redibuja
-        if (figura.rigido){
-            if (!figura.rigido.sinColision){ // Si está definido el objeto como que si puede detectar colisiones
-                figura.tocandoRigidos();
-                if (!figura.rigido.colision) { // Si está en colisión, la gravedad no le afecta en un frame
-                    figura.afectarGravedad();
-                    figura.tocandoFondo();
-                    console.log("bajando", figura.id);
-                }
-            }else{
-                figura.afectarGravedad();
-            }
-        }
-    });
+    
 }
 
 function Error(invoker){

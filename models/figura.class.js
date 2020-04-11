@@ -25,35 +25,23 @@ class Figura {
 
     tocandoRigidos = function(){
         let figuras = Environment.figuras.filter((x) => x != this);
-        let {x, y, altura, anchura} = this.transform;
-        let objetoColision = [];
+
         figuras.forEach((figura) => {
-            if (objetoColision.length > 0) {
-                return;
-            }
-            if (x < figura.transform.x + figura.transform.anchura && x + anchura > figura.transform.x && y < figura.transform.y + figura.transform.altura && altura + y > figura.transform.y) {
-                if(!figura.rigido.sinColision){
-                    objetoColision.push(figura);
+            if (this.transform.x < (figura.transform.x + figura.transform.anchura) - this.rigido.valor &&
+                this.transform.x + this.transform.anchura > figura.transform.x - this.rigido.valor &&
+                this.transform.y < (figura.transform.y + figura.transform.altura) - this.rigido.valor &&
+                this.transform.altura + this.transform.y > figura.transform.y - this.rigido.valor) { // Si se están tocando en el próximo vuelo de esta figura
+                console.log("tocando");
+                if(figura.transform.y > this.transform.y){ // Solamente si la figura a la que estoy tocando, está mas abajo que yo
+                    let fondo = figura.transform.y - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
+                    this.transform.y = fondo;
+                    this.rigido.colision = true;
                 }
-            }else{
+            } else { //
                 this.rigido.colision = false;
             }
         });
 
-        objetoColision.forEach(obj => {
-            if ((obj.transform.y) > (this.transform.y)) { // Si el otro objeto está más abajo que YO
-                obj.rigido.valor = this.rigido.valor; // Equilibra la gravedad de los dos objetos
-                if(obj.tocandoFondo()){
-                    obj.rigido.colision = true;
-                }else{
-                    obj.rigido.colision = false;
-                }
-            }else{
-                obj.rigido.colision = true;
-            }
-        });
-
-        return false;
     }
 
 }
