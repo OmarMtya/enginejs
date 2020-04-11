@@ -5,14 +5,14 @@ function Dibujar(){
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
     c.beginPath(); // Importante limpiar las líneas ya creadas
     
-    Environment.figuras.forEach(figura => { // Por cada figura creada, se redibuja
+    
+    Environment.figuras.forEach((figura)=>{
         const transform = figura.transform;
-        
         switch (figura.tipo) {
             case "circulo":
             case "circle": // En el circulo, el tamaño solamente se toma en cuenta la altura
                 c.fillStyle = transform.relleno;
-                c.arc(transform.x, transform.y, transform.altura, 0, 2 * Math.PI);
+                c.arc(transform.x, transform.y, transform.radio, 0, 2 * Math.PI);
                 break;
             case "cuadrado":
             case "square":
@@ -24,11 +24,21 @@ function Dibujar(){
                 break;
         }
         c.stroke();
-    
-        if(figura.rigido){
-            figura.afectarGravedad();
+    });
+
+    Environment.figuras.forEach(figura => { // Por cada figura creada, se redibuja
+        if (figura.rigido){
+            if (!figura.rigido.sinColision){ // Si está definido el objeto como que si puede detectar colisiones
+                figura.tocandoRigidos();
+                if (!figura.rigido.colision) { // Si está en colisión, la gravedad no le afecta en un frame
+                    figura.afectarGravedad();
+                    figura.tocandoFondo();
+                    console.log("bajando", figura.id);
+                }
+            }else{
+                figura.afectarGravedad();
+            }
         }
-        figura.tocandoFondo();
     });
 }
 
