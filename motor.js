@@ -52,8 +52,26 @@ function Dibujar(){
     
 }
 
+/**
+ * Funcion que inicializa el canvas con reglas de superposición y otros
+ */
+function Inicializar() {
+    Environment.figuras.forEach((a, index, figuras) => {
+        if(figuras.length - 1 != index){ // Si no es el último
+            let b = figuras[index + 1];
+            if (a.transform.x < (b.transform.x + b.transform.anchura) &&
+                a.transform.x + a.transform.anchura > b.transform.x &&
+                a.transform.y < (b.transform.y + b.transform.altura) &&
+                a.transform.altura + a.transform.y > b.transform.y) { // Si se están tocando los muevo en el eje de las X a la izquierda
+                a.transform.x = b.transform.x - a.transform.anchura;
+                Inicializar(); // Llamada recursiva si el objeto ocupa el mismo espacio en el mismo tiempo
+            }
+        }
+    });
+}
+
 function Error(invoker){
     console.error("EXISTE UN ERROR", invoker);
 }
 
-export { Dibujar, Error }
+export { Dibujar, Error, Inicializar }

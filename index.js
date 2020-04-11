@@ -1,4 +1,4 @@
-import { Dibujar, Error } from "./dibujar.js";
+import { Dibujar, Error, Inicializar } from "./motor.js";
 import { Figura } from "./models/figura.class.js";
 import { Transform } from "./models/transform.class.js";
 import { Rigido } from "./models/rigido.class.js";
@@ -8,16 +8,15 @@ let $ = (x) => document.querySelector(x);
 
 
 Environment.agregarFigura(new Figura({
-    tipo: "cuadrado",
+    tipo: "circulo",
     id: "azul",
     transform: new Transform({
-        x: 360,
-        y: 200,
-        altura: 20,
-        anchura: 20,
+        x: 350,
+        y: 0,
+        radio: 20,
         relleno: "#3142AB"
     }),
-    rigido: new Rigido(15)
+    rigido: new Rigido(20)
 }));
 
 
@@ -25,24 +24,25 @@ Environment.agregarFigura(new Figura({
     tipo: "cuadrado",
     id: "negro",
     transform: new Transform({
-        x: 360,
-        y: 300,
-        altura: 50,
+        x: 350,
+        y: 200,
+        altura: 20,
         anchura: 20,
     }),
     rigido: new Rigido()
 }));
 
-
-
-
-
-
-
-
-
-
-
+Environment.agregarFigura(new Figura({
+    tipo: "cuadrado",
+    id: "tercero",
+    transform: new Transform({
+        x: 350,
+        y: 200,
+        altura: 50,
+        anchura: 20,
+    }),
+    rigido: new Rigido()
+}));
 
 
 
@@ -62,6 +62,8 @@ $("#imagen").onchange = function(e){
         rigido: new Rigido()
     }));
 };
+
+Inicializar();
 
 Dibujar();
 
