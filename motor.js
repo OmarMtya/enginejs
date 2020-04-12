@@ -54,7 +54,6 @@ function Dibujar(){
     
 }
 
-// Fixme: Si hay un objeto abajo de otro, y tiene mas velocidad o se van a golpear, se detiene en el cielo
 /**
  * Funcion que inicializa el canvas con reglas de superposición y otros
  */

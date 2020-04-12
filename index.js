@@ -72,6 +72,6 @@ Inicializar();
 
 Dibujar();
 
-// setInterval(() => {
-//     Dibujar();
-// }, 1000 / Environment.FPS);
+setInterval(() => {
+    Dibujar();
+}, 1000 / Environment.FPS);
