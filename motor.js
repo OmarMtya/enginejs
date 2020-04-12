@@ -64,10 +64,8 @@ function Inicializar() {
         if(index === Environment.figuras.length){
             return;
         }
-        console.log(pivote.id);
         for (let i = 0; i < (Environment.figuras.length); i++) {
             const figura = Environment.figuras[i];
-            console.log("-" + figura.id);
             if(pivote == figura){
                 return;
             }
@@ -80,22 +78,6 @@ function Inicializar() {
             }
         }
     });
-
-    // Environment.figuras.forEach((z) => {
-    //     Environment.figuras.forEach((a, index, arreglo) => {
-    //         let b = arreglo[index + 1];
-    //         console.log(a.id, b.id);
-    //         if (Tocando(a, b, b.tipo == 'circulo')) {
-    //             console.log("SACALO");
-    //             if (b.tipo == 'circulo') {
-    //                 a.transform.x = b.transform.x - (a.transform.anchura + b.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
-    //             } else {
-    //                 a.transform.x = b.transform.x - a.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
-    //             }
-    //         }
-    //     })
-
-    // });
 }
 
 function Error(invoker){
