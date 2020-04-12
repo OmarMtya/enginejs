@@ -6,6 +6,9 @@
  * @param {Boolean} calcularGravedad - Tomando en cuenta la gravedad para el próximo tick
  */
 function Tocando (a, b, circulo, calcularGravedad = true) {
+    if (a.rigido.sinColision || b.rigido.sinColision){
+        return false;
+    }
     let fixGravedad = 0; // Variable para calcular si se necesita calcular la gravedad
     if (calcularGravedad) {
         fixGravedad = a.rigido.valor;
