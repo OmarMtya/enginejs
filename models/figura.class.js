@@ -12,7 +12,7 @@ class Figura {
 
     afectarGravedad = function(){
         this.transform.y += this.rigido.valor;
-        this.rigido.valor += (this.rigido.valor / 60);
+        this.rigido.valor += (this.rigido.valor / (Environment.FPS * 100));
     }
 
     tocandoFondo = function () {
@@ -31,6 +31,7 @@ class Figura {
         if (this.rigido.gravedadReiniciada) {
             this.rigido.gravedadReiniciada = false;
             this.rigido.colision = false;
+            
         }
 
         figuras.forEach((figura) => {
@@ -38,7 +39,6 @@ class Figura {
                 if(figura.transform.y > this.transform.y){ // Solamente si la figura a la que estoy tocando, está mas abajo que yo
                     let fondo = null;
                     if(figura.tipo == 'circulo'){
-                        console.error();
                         fondo = (figura.transform.y - figura.transform.radio) - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
                     }else{
                         fondo = figura.transform.y - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
@@ -48,8 +48,14 @@ class Figura {
                     if(figura.tocadoPor != this){
                         figura.tocadoPor = this;
                         figura.rigido.valor = this.rigido.valor; // El objeto afectado por el golpe toma la gravedad del objeto
-                        this.rigido.valor = this.rigido.valorBackup; // Se reinicia la gravedad del objeto
+                        // this.rigido.valor = this.rigido.valorBackup; // Se reinicia la gravedad del objeto
+                        this.rigido.valor = Environment.gravedad; // Se reinicia la gravedad del objeto
                         this.rigido.gravedadReiniciada = true; // Se acaba de reiniciar
+                        if (this.id == 'debug') {
+                            if (this.rigido.colision) {
+                                console.log(this);
+                            }
+                        }
                     }
                 } else { // El colisión en falso va al objeto que está debajo. No va en el siguiente else, porque FIGURA y THIS sí se están tocando (Se comen entre ellos)
                     this.rigido.colision = false;
