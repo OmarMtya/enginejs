@@ -1,11 +1,12 @@
 import { Environment } from "./environment.class.js";
 class Figura {
-    constructor({id, tipo, transform, rigido = null, audio = null}){
+    constructor({id, nombre, tipo, transform, rigido = null, audio = null}){
         this.id = id;
         this.tipo = tipo;
         this.transform = transform;
         this.rigido = rigido;
         this.audio = audio;
+        this.nombre = nombre;
     }
 
     afectarGravedad = function(){
@@ -25,7 +26,7 @@ class Figura {
     }
 
     tocandoRigidos = function(){
-        let figuras = Environment.figuras.filter((x) => x != this && !x.rigido.sinColision);
+        let figuras = Environment.figuras.filter((x) => x != this && (x.rigido != undefined && !x.rigido.sinColision));
         if (this.rigido.gravedadReiniciada) {
             this.rigido.gravedadReiniciada = false;
             this.rigido.colision = false;

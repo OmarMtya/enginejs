@@ -6,46 +6,30 @@ import { Environment } from "./models/environment.class.js";
 
 let $ = (x) => document.querySelector(x);
 
-
-
+Environment.agregarFigura(new Figura({
+    tipo: "cuadrado",
+    id: "linea",
+    transform: new Transform({
+        x: 575,
+        y: 0,
+        altura: 5,
+        anchura: 100,
+        relleno: "#000000"
+    }),
+    rigido: new Rigido()
+}));
 
 Environment.agregarFigura(new Figura({
     tipo: "cuadrado",
     id: "rojo",
     transform: new Transform({
-        x: 600,
-        y: 0,
-        altura: 20,
-        anchura: 20,
+        x: 550,
+        y: 20,
+        altura: 50,
+        anchura: 50,
         relleno: "#FF0000"
     }),
     rigido: new Rigido(20)
-}));
-
-Environment.agregarFigura(new Figura({
-    tipo: "cuadrado",
-    id: "hola",
-    transform: new Transform({
-        x: 300,
-        y: 0,
-        altura: 20,
-        anchura: 20,
-        relleno: "#FF0000"
-    }),
-    rigido: new Rigido(20)
-}));
-
-Environment.agregarFigura(new Figura({
-    tipo: "cuadrado",
-    id: "adios",
-    transform: new Transform({
-        x: 310,
-        y: 300,
-        altura: 20,
-        anchura: 20,
-        relleno: "#000000"
-    }),
-    rigido: new Rigido()
 }));
 
 
