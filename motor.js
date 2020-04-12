@@ -16,6 +16,7 @@ function Dibujar(){
         switch (figura.tipo) {
             case "circulo": // En el circulo, el tamaño solamente se toma en cuenta la altura
                 c.fillStyle = transform.relleno;
+                c.fill();
                 c.arc(transform.x, transform.y, transform.radio, 0, 2 * Math.PI);
                 break;
             case "cuadrado":
@@ -23,7 +24,11 @@ function Dibujar(){
                 c.fillRect(transform.x, transform.y, transform.anchura, transform.altura);
                 break;
             case "imagen":
-                c.drawImage(transform.imagen, 0, 0, transform.imagen.width, transform.imagen.height, transform.x, transform.y, transform.anchura, transform.altura);
+                if(transform.imagen.sprite){
+                    DibujarSprite(c, transform);
+                }else{
+                    c.drawImage(transform.imagen.src, 0, 0, transform.imagen.src.width, transform.imagen.src.height, transform.x, transform.y, transform.anchura, transform.altura);
+                }
                 break;
         }
         c.stroke();
@@ -52,6 +57,16 @@ function Dibujar(){
     });
 
     
+}
+
+function DibujarSprite(c, transform){
+    let {src, sprite} = transform.imagen;
+    let frameX = sprite.anchura * sprite.frame.valor; // El valor de la X es igual a la anchura de cada imagen por el valor del frame
+    c.drawImage(src, frameX, sprite.altura * sprite.row, sprite.anchura, sprite.altura, transform.x, transform.y, sprite.anchura, sprite.altura);
+    if(sprite.frame.ultimo < Date.now() - (sprite.velocidad * 1000) ){ // Si el ultimo frame actualizado es mas pequeño que el tiempo actual más los segundos de cada frame
+        sprite.frame.valor = ++sprite.frame.valor % sprite.cols;
+        sprite.frame.ultimo = Date.now();
+    }
 }
 
 /**

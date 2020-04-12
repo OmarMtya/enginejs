@@ -8,6 +8,9 @@ class Figura {
         this.rigido = rigido;
         this.audio = audio;
         this.nombre = nombre;
+        if(this.audio){
+            // this.audio.play();
+        }
     }
 
     afectarGravedad = function(){
