@@ -7,7 +7,7 @@ function Dibujar(){
     
 
 
-    Environment.figuras.sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas
+    [...Environment.figuras].sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas. (...) se clona para no manipular el original
         if(a.transform.y > b.transform.y){
             return -1;
         }

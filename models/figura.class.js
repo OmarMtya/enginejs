@@ -10,6 +10,7 @@ class Figura {
 
     afectarGravedad = function(){
         this.transform.y += this.rigido.valor;
+        this.rigido.valor += (this.rigido.valor / 60);
     }
 
     tocandoFondo = function () {
@@ -24,7 +25,7 @@ class Figura {
     }
 
     tocandoRigidos = function(){
-        let figuras = Environment.figuras.filter((x) => x != this);
+        let figuras = Environment.figuras.filter((x) => x != this && !x.rigido.sinColision);
         if (this.rigido.gravedadReiniciada) {
             this.rigido.gravedadReiniciada = false;
             this.rigido.colision = false;
@@ -42,7 +43,7 @@ class Figura {
                     if(figura.tocadoPor != this){
                         figura.tocadoPor = this;
                         figura.rigido.valor = this.rigido.valor; // El objeto afectado por el golpe toma la gravedad del objeto
-                        this.rigido.valor = Environment.gravedad; // Se reinicia la gravedad del objeto
+                        this.rigido.valor = this.rigido.valorBackup; // Se reinicia la gravedad del objeto
                         this.rigido.gravedadReiniciada = true; // Se acaba de reiniciar
                     }
                 } else { // El colisión en falso va al objeto que está debajo. No va en el siguiente else, porque FIGURA y THIS sí se están tocando (Se comen entre ellos)
