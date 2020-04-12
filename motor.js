@@ -1,6 +1,8 @@
 import { Environment } from "./models/environment.class.js";
 import { Tocando } from "./models/utilidades.class.js";
 
+let start = null;
+
 function Dibujar(){
     Environment.contador += 1;
     const c = Environment.canvas;
@@ -95,8 +97,18 @@ function Inicializar() {
     });
 }
 
+function Step(timestamp) {
+    console.log("ENTRO");
+    if (!start) start = timestamp;
+    var progress = timestamp - start;
+    Dibujar();
+    // if (progress < 2000) {
+        window.requestAnimationFrame(Step);
+    // }
+}
+
 function Error(invoker){
     console.error("EXISTE UN ERROR", invoker);
 }
 
-export { Dibujar, Error, Inicializar }
+export { Error, Inicializar, Step }

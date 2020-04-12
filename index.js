@@ -1,4 +1,4 @@
-import { Dibujar, Error, Inicializar } from "./motor.js";
+import { Error, Inicializar, Step } from "./motor.js";
 import { Figura } from "./models/figura.class.js";
 import { Transform } from "./models/transform.class.js";
 import { Rigido } from "./models/rigido.class.js";
@@ -10,19 +10,31 @@ let $ = (x) => document.querySelector(x);
 
 Environment.agregarFigura(new Figura({
         tipo: "cuadrado",
+        transform: new Transform({
+            x: 500,
+            y: 100,
+            anchura: 20,
+            altura: 20,
+            relleno: "#000000"
+        }),
+        rigido: new Rigido()
+    }));
+
+Environment.agregarFigura(new Figura({
         tipo: "cuadrado",
         transform: new Transform({
             x: 500,
             y: 0,
             anchura: 20,
             altura: 20,
-            relleno: "#00FF00"
+            relleno: "#00CCCC"
         }),
-        rigido: new Rigido()
+        rigido: new Rigido(15)
     }));
 
 
 $("#imagen").onchange = function(e){
+    console.log("entro");
     let img = new Image();
     img.src = URL.createObjectURL(this.files[0]);
     Environment.agregarFigura(new Figura({
@@ -52,7 +64,6 @@ $("#audio").onchange = function(e){
     audio.src = URL.createObjectURL(this.files[0]);
     Environment.agregarFigura(new Figura({
         tipo: "cuadrado",
-        tipo: "cuadrado",
         transform: new Transform({
             sonido: new Sonido({
                 src: audio,
@@ -70,8 +81,8 @@ $("#audio").onchange = function(e){
 
 Inicializar();
 
-Dibujar();
+window.requestAnimationFrame(Step);
 
-setInterval(() => {
-    Dibujar();
-}, 1000 / Environment.FPS);
+// requestAnimationFrame(() => {
+//     Dibujar();
+// });
