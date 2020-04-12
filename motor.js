@@ -7,6 +7,28 @@ function Dibujar(){
     
 
 
+    
+
+    Environment.figuras.forEach((figura)=>{
+        const transform = figura.transform;
+        switch (figura.tipo) {
+            case "circulo":
+            case "circle": // En el circulo, el tamaño solamente se toma en cuenta la altura
+                c.fillStyle = transform.relleno;
+                c.arc(transform.x, transform.y, transform.radio, 0, 2 * Math.PI);
+                break;
+            case "cuadrado":
+            case "square":
+                c.fillStyle = transform.relleno;
+                c.fillRect(transform.x, transform.y, transform.anchura, transform.altura);
+                break;
+            case "imagen":
+                c.drawImage(transform.imagen, 0, 0, transform.imagen.width, transform.imagen.height, transform.x, transform.y, transform.anchura, transform.altura);
+                break;
+        }
+        c.stroke();
+    });
+
     [...Environment.figuras].sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas. (...) se clona para no manipular el original
         if(a.transform.y > b.transform.y){
             return -1;
@@ -27,26 +49,6 @@ function Dibujar(){
                 figura.afectarGravedad();
             }
         }
-    });
-
-    Environment.figuras.forEach((figura)=>{
-        const transform = figura.transform;
-        switch (figura.tipo) {
-            case "circulo":
-            case "circle": // En el circulo, el tamaño solamente se toma en cuenta la altura
-                c.fillStyle = transform.relleno;
-                c.arc(transform.x, transform.y, transform.radio, 0, 2 * Math.PI);
-                break;
-            case "cuadrado":
-            case "square":
-                c.fillStyle = transform.relleno;
-                c.fillRect(transform.x, transform.y, transform.anchura, transform.altura);
-                break;
-            case "imagen":
-                c.drawImage(transform.imagen, 0, 0, transform.imagen.width, transform.imagen.height, transform.x, transform.y, transform.anchura, transform.altura);
-                break;
-        }
-        c.stroke();
     });
 
     

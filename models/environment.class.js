@@ -1,6 +1,6 @@
 class Environment {
     static canvas = document.querySelector("canvas").getContext("2d");
-    static FPS = 60;
+    static FPS = 1;
     static altura = 800;
     static anchura = 1200;
     static gravedad = 9.8;

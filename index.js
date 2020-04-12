@@ -15,8 +15,8 @@ Environment.agregarFigura(new Figura({
     transform: new Transform({
         x: 600,
         y: 0,
-        altura: 50,
-        anchura: 50,
+        altura: 20,
+        anchura: 20,
         relleno: "#FF0000"
     }),
     rigido: new Rigido(20)
@@ -28,21 +28,21 @@ Environment.agregarFigura(new Figura({
     transform: new Transform({
         x: 300,
         y: 0,
-        altura: 50,
-        anchura: 50,
+        altura: 20,
+        anchura: 20,
         relleno: "#FF0000"
     }),
-    rigido: new Rigido(20, true)
+    rigido: new Rigido(20)
 }));
 
 Environment.agregarFigura(new Figura({
     tipo: "cuadrado",
     id: "adios",
     transform: new Transform({
-        x: 300,
-        y: 200,
-        altura: 50,
-        anchura: 50,
+        x: 310,
+        y: 300,
+        altura: 20,
+        anchura: 20,
         relleno: "#000000"
     }),
     rigido: new Rigido()
