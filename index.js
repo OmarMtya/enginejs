@@ -10,26 +10,25 @@ Environment.agregarFigura(new Figura({
     tipo: "cuadrado",
     id: "linea",
     transform: new Transform({
-        x: 575,
-        y: 0,
+        x: 700,
+        y: 500,
         altura: 5,
         anchura: 100,
         relleno: "#000000"
     }),
-    rigido: new Rigido()
+    rigido: new Rigido(20)
 }));
 
 Environment.agregarFigura(new Figura({
-    tipo: "cuadrado",
+    tipo: "circulo",
     id: "rojo",
     transform: new Transform({
-        x: 550,
-        y: 20,
-        altura: 50,
-        anchura: 50,
+        x: 700,
+        y: 0,
+        radio: 50,
         relleno: "#FF0000"
     }),
-    rigido: new Rigido(20)
+    rigido: new Rigido()
 }));
 
 
@@ -46,7 +45,7 @@ $("#imagen").onchange = function(e){
             anchura: 100,
             imagen: img
         }),
-        rigido: new Rigido()
+        rigido: new Rigido(10)
     }));
 };
 

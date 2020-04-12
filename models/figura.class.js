@@ -1,4 +1,5 @@
 import { Environment } from "./environment.class.js";
+import { Tocando } from "./utilidades.class.js";
 class Figura {
     constructor({id, nombre, tipo, transform, rigido = null, audio = null}){
         this.id = id;
@@ -33,12 +34,15 @@ class Figura {
         }
 
         figuras.forEach((figura) => {
-            if (this.transform.x < (figura.transform.x + figura.transform.anchura)&&
-                this.transform.x + this.transform.anchura > figura.transform.x &&
-                this.transform.y < (figura.transform.y + figura.transform.altura) - this.rigido.valor &&
-                this.transform.altura + this.transform.y > figura.transform.y - this.rigido.valor) { // Si se están tocando en el próximo vuelo de esta figura, solamente en el eje de las Y
+            if (Tocando(this, figura, figura.tipo == 'circulo')) { // Si se están tocando en el próximo vuelo de esta figura, solamente en el eje de las Y
                 if(figura.transform.y > this.transform.y){ // Solamente si la figura a la que estoy tocando, está mas abajo que yo
-                    let fondo = figura.transform.y - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
+                    let fondo = null;
+                    if(figura.tipo == 'circulo'){
+                        console.error();
+                        fondo = (figura.transform.y - figura.transform.radio) - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
+                    }else{
+                        fondo = figura.transform.y - this.transform.altura; // Nuevo fondo final: Altura de la figura de abajo, menos la mía
+                    }
                     this.transform.y = fondo;
                     this.rigido.colision = true;
                     if(figura.tocadoPor != this){
