@@ -6,6 +6,7 @@ class Environment {
     static gravedad = 9.8;
     static figuras = [];
     static contador = 0; // Contador de Frames registrados
+    static audioGeneral;
 
     static agregarFigura(figura){
         Environment.figuras.push(figura);

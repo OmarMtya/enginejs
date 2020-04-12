@@ -69,12 +69,14 @@ function Inicializar() {
             if(pivote == figura){
                 return;
             }
-            if (Tocando(pivote, figura, figura.tipo == 'circulo')) {
+            if (Tocando(pivote, figura, figura.tipo == 'circulo', false)) {
                 if (figura.tipo == 'circulo') {
                     pivote.transform.x = figura.transform.x - (pivote.transform.anchura + figura.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
                 } else {
                     pivote.transform.x = figura.transform.x - pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
                 }
+            }else{
+                console.log("No se están tocando");
             }
         }
     });

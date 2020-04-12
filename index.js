@@ -20,24 +20,11 @@ Environment.agregarFigura(new Figura({
 }));
 
 Environment.agregarFigura(new Figura({
-    id: "omar",
-    tipo: "cuadrado",
-    transform: new Transform({
-        x: 500,
-        y: 0,
-        altura: 20,
-        anchura: 20,
-        relleno: "#FF0000"
-    }),
-    rigido: new Rigido()
-}));
-
-Environment.agregarFigura(new Figura({
     id: "esteban",
     tipo: "cuadrado",
     transform: new Transform({
         x: 500,
-        y: 0,
+        y: 19,
         anchura: 20,
         altura: 20,
         relleno: "#00FF00"
@@ -45,18 +32,6 @@ Environment.agregarFigura(new Figura({
     rigido: new Rigido()
 }));
 
-Environment.agregarFigura(new Figura({
-    id: "rosa",
-    tipo: "cuadrado",
-    transform: new Transform({
-        x: 500,
-        y: 0,
-        anchura: 20,
-        altura: 20,
-        relleno: "#0000FF"
-    }),
-    rigido: new Rigido()
-}));
 
 
 $("#imagen").onchange = function(e){
@@ -76,10 +51,29 @@ $("#imagen").onchange = function(e){
     }));
 };
 
+$("#audio").onchange = function(e){
+    console.log("ENTRO");
+    let audio = new Audio();
+    audio.src = URL.createObjectURL(this.files[0]);
+    audio.play();
+    Environment.agregarFigura(new Figura({
+        tipo: "cuadrado",
+        tipo: "cuadrado",
+        transform: new Transform({
+            x: 500,
+            y: 0,
+            anchura: 20,
+            altura: 20,
+            relleno: "#00FF00"
+        }),
+        rigido: new Rigido()
+    }));
+};
+
 Inicializar();
 
 Dibujar();
 
-setInterval(() => {
-    Dibujar();
-}, 1000 / Environment.FPS);
+// setInterval(() => {
+//     Dibujar();
+// }, 1000 / Environment.FPS);
