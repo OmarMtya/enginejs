@@ -11,24 +11,25 @@ Environment.agregarFigura(new Figura({
     id: "linea",
     transform: new Transform({
         x: 700,
-        y: 500,
+        y: 200,
         altura: 5,
         anchura: 100,
         relleno: "#000000"
     }),
-    rigido: new Rigido(20)
+    rigido: new Rigido(1)
 }));
 
 Environment.agregarFigura(new Figura({
-    tipo: "circulo",
+    tipo: "cuadrado",
     id: "rojo",
     transform: new Transform({
         x: 700,
         y: 0,
-        radio: 50,
+        anchura: 50,
+        altura: 50,
         relleno: "#FF0000"
     }),
-    rigido: new Rigido()
+    rigido: new Rigido(9)
 }));
 
 
