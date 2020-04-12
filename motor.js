@@ -11,7 +11,7 @@ function Dibujar(){
 
     
 
-    Environment.figuras.forEach((figura)=>{
+    Environment.figuras.forEach((figura)=>{ // Dibuja los objetos
         const transform = figura.transform;
         switch (figura.tipo) {
             case "circulo": // En el circulo, el tamaño solamente se toma en cuenta la altura
@@ -34,6 +34,7 @@ function Dibujar(){
         c.stroke();
     });
 
+    // Calcula el próximo movimiento
     [...Environment.figuras].sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas. (...) se clona para no manipular el original
         if(a.transform.y > b.transform.y){
             return -1;
@@ -42,7 +43,7 @@ function Dibujar(){
             return 1;
         }
         return 0;
-    } ) .forEach(figura => { // Por cada figura creada, se redibuja
+    }) .forEach(figura => { // Por cada figura creada, se redibuja
         if (figura.rigido) {
             if (!figura.rigido.sinColision) { // Si está definido el objeto como que si puede detectar colisiones
                 figura.tocandoRigidos();

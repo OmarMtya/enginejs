@@ -1,16 +1,12 @@
 import { Environment } from "./environment.class.js";
 import { Tocando } from "./utilidades.class.js";
 class Figura {
-    constructor({id, nombre, tipo, transform, rigido = null, audio = null}){
+    constructor({id, nombre, tipo, transform, rigido = null}){
         this.id = id;
         this.tipo = tipo;
         this.transform = transform;
         this.rigido = rigido;
-        this.audio = audio;
         this.nombre = nombre;
-        if(this.audio){
-            // this.audio.play();
-        }
     }
 
     afectarGravedad = function(){
@@ -19,7 +15,12 @@ class Figura {
     }
 
     tocandoFondo = function () {
-        let fondo = Environment.altura - this.transform.altura;
+        let fondo;
+        if(this.transform.imagen && this.transform.imagen.sprite){
+            fondo = Environment.altura - (this.transform.imagen.sprite.altura); // Si es un sprite, tomar en cuenta el tamaño del sprite, no de la imagen
+        }else{
+            fondo = Environment.altura - this.transform.altura;
+        }
         if (this.transform.y >= fondo) { // Si el fondo de la figura está igual que el fondo, o mayor
             this.transform.y = fondo;
             this.rigido.colision = true;
@@ -60,6 +61,26 @@ class Figura {
                 }
             }
         });
+
+        
+        
+        if (this.transform.sonido && (this.transform.sonido.activacion == 'colision' || this.transform.sonido.activacion == 'colisionInversa')) {
+            if (this.transform.sonido.activacion == 'colision'){
+                if (this.rigido.colision && this.transform.sonido.src.paused ) {
+                    this.transform.sonido.src.play();
+                }
+                if (!this.rigido.colision && !this.transform.sonido.src.paused) {
+                    this.transform.sonido.src.pause();
+                }
+            }else{
+                if (!this.rigido.colision && this.transform.sonido.src.paused) {
+                    this.transform.sonido.src.play();
+                }
+                if (this.rigido.colision && !this.transform.sonido.src.paused) {
+                    this.transform.sonido.src.pause();
+                }
+            }
+        }
 
     }
 
