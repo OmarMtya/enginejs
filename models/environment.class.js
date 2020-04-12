@@ -8,11 +8,11 @@ class Environment {
     static contador = 0; // Contador de Frames registrados
     static audioGeneral;
 
-    static init(canvas) {
+    static Init(canvas) {
         Environment.canvas = canvas.getContext("2d");
     }
 
-    static agregarFigura(figura){
+    static AgregarFigura(figura){
         Environment.figuras.push(figura);
     }
 }

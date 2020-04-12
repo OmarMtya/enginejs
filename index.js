@@ -1,4 +1,4 @@
-import { Error, Inicializar, Step } from "./motor.js";
+import { Animar } from "./motor.js";
 import { Figura } from "./models/figura.class.js";
 import { Transform } from "./models/transform.class.js";
 import { Rigido } from "./models/rigido.class.js";
@@ -16,12 +16,9 @@ import { Sonido } from "./models/multimedia/sonido.class.js";
     Environment.Imagen = Imagen;
     Environment.Sprite = Sprite;
     Environment.Sonido = Sonido;
+    Environment.Animar = Animar;
 
     let $g = Environment;
 
     window.$g = $g;
 })();
-
-Inicializar();
-
-window.requestAnimationFrame(Step);

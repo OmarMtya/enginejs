@@ -88,7 +88,7 @@ function Inicializar() {
             }
             if (Tocando(pivote, figura, figura.tipo == 'circulo', false)) {
                 if (figura.tipo == 'circulo') {
-                    pivote.transform.x = figura.transform.x - (pivote.transform.anchura + figura.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
+                    pivote.transform.x = figura.transform.x - (pivote.transform.anchura + (figura.transform.radio * 2)); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
                 } else {
                     pivote.transform.x = figura.transform.x - pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
                 }
@@ -106,8 +106,13 @@ function Step(timestamp) {
     // }
 }
 
+function Animar(){
+    Inicializar();
+    window.requestAnimationFrame(Step);
+}
+
 function Error(invoker){
     console.error("EXISTE UN ERROR", invoker);
 }
 
-export { Error, Inicializar, Step }
+export { Error, Animar, Step }
