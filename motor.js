@@ -75,8 +75,6 @@ function Inicializar() {
                 } else {
                     pivote.transform.x = figura.transform.x - pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
                 }
-            }else{
-                console.log("No se están tocando");
             }
         }
     });

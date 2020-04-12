@@ -35,7 +35,6 @@ Environment.agregarFigura(new Figura({
 
 
 $("#imagen").onchange = function(e){
-    console.log("ENTRO");
     let img = new Image();
     img.src = URL.createObjectURL(this.files[0]);
     Environment.agregarFigura(new Figura({
@@ -52,7 +51,6 @@ $("#imagen").onchange = function(e){
 };
 
 $("#audio").onchange = function(e){
-    console.log("ENTRO");
     let audio = new Audio();
     audio.src = URL.createObjectURL(this.files[0]);
     audio.play();
