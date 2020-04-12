@@ -51,11 +51,6 @@ class Figura {
                         // this.rigido.valor = this.rigido.valorBackup; // Se reinicia la gravedad del objeto
                         this.rigido.valor = Environment.gravedad; // Se reinicia la gravedad del objeto
                         this.rigido.gravedadReiniciada = true; // Se acaba de reiniciar
-                        if (this.id == 'debug') {
-                            if (this.rigido.colision) {
-                                console.log(this);
-                            }
-                        }
                     }
                 } else { // El colisión en falso va al objeto que está debajo. No va en el siguiente else, porque FIGURA y THIS sí se están tocando (Se comen entre ellos)
                     this.rigido.colision = false;

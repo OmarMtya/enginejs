@@ -2,6 +2,7 @@ import { Environment } from "./models/environment.class.js";
 import { Tocando } from "./models/utilidades.class.js";
 
 function Dibujar(){
+    Environment.contador += 1;
     const c = Environment.canvas;
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
     c.beginPath(); // Importante limpiar las líneas ya creadas
@@ -53,24 +54,48 @@ function Dibujar(){
     
 }
 
+// Fixme: Si hay un objeto abajo de otro, y tiene mas velocidad o se van a golpear, se detiene en el cielo
 /**
  * Funcion que inicializa el canvas con reglas de superposición y otros
  */
 function Inicializar() {
-    Environment.figuras.forEach((a, index, figuras) => {
-        if(figuras.length - 1 != index){ // Si no es el último
-            let b = figuras[index + 1];
-            if(Tocando(a, b, b.tipo == 'circulo')){
-                console.log("SACALO");
-                if(b.tipo == 'circulo'){
-                    a.transform.x = b.transform.x - (a.transform.anchura + b.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
-                }else{
-                    a.transform.x = b.transform.x - a.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+
+    Environment.figuras.forEach((pivote, index) => { // Empieza el ordenamiento burbuja para mover a los objetos que se tocan al incio del renderizado
+        if(index === Environment.figuras.length){
+            return;
+        }
+        console.log(pivote.id);
+        for (let i = 0; i < (Environment.figuras.length); i++) {
+            const figura = Environment.figuras[i];
+            console.log("-" + figura.id);
+            if(pivote == figura){
+                return;
+            }
+            if (Tocando(pivote, figura, figura.tipo == 'circulo')) {
+                if (figura.tipo == 'circulo') {
+                    pivote.transform.x = figura.transform.x - (pivote.transform.anchura + figura.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
+                } else {
+                    pivote.transform.x = figura.transform.x - pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
                 }
-                Inicializar(); // Llamada recursiva si el objeto ocupa el mismo espacio en el mismo tiempo
             }
         }
     });
+
+    // Environment.figuras.forEach((z) => {
+    //     Environment.figuras.forEach((a, index, arreglo) => {
+    //         let b = arreglo[index + 1];
+    //         console.log(a.id, b.id);
+    //         if (Tocando(a, b, b.tipo == 'circulo')) {
+    //             console.log("SACALO");
+    //             if (b.tipo == 'circulo') {
+    //                 a.transform.x = b.transform.x - (a.transform.anchura + b.transform.anchura); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
+    //             } else {
+    //                 a.transform.x = b.transform.x - a.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+    //             }
+    //         }
+    //     })
+
+    // });
 }
 
 function Error(invoker){

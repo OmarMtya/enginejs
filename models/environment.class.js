@@ -5,6 +5,7 @@ class Environment {
     static anchura = 1200;
     static gravedad = 9.8;
     static figuras = [];
+    static contador = 0; // Contador de Frames registrados
 
     static agregarFigura(figura){
         Environment.figuras.push(figura);
