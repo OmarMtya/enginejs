@@ -98,7 +98,6 @@ function Inicializar() {
 }
 
 function Step(timestamp) {
-    console.log("ENTRO");
     if (!start) start = timestamp;
     var progress = timestamp - start;
     Dibujar();

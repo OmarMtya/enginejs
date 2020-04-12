@@ -29,3 +29,20 @@
 <input type="file" id="audio">Audio
 <canvas width='1200px' height='800px'></canvas>
 <script type="module" src="index.js"></script>
+
+<script>
+    window.onload = function(){
+        $g.init($("canvas"));
+        $g.agregarFigura(new $g.Figura({
+            tipo: "cuadrado",
+            transform: new $g.Transform({
+                x: 500,
+                y: 100,
+                anchura: 20,
+                altura: 20,
+                relleno: "#000000"
+            }),
+            rigido: new $g.Rigido()
+        }));
+    }
+</script>

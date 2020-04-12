@@ -1,5 +1,5 @@
 class Environment {
-    static canvas = document.querySelector("canvas").getContext("2d");
+    static canvas;
     static FPS = 60;
     static altura = 800;
     static anchura = 1200;
@@ -7,6 +7,10 @@ class Environment {
     static figuras = [];
     static contador = 0; // Contador de Frames registrados
     static audioGeneral;
+
+    static init(canvas) {
+        Environment.canvas = canvas.getContext("2d");
+    }
 
     static agregarFigura(figura){
         Environment.figuras.push(figura);

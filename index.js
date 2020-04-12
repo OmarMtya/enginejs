@@ -6,83 +6,22 @@ import { Environment } from "./models/environment.class.js";
 import { Imagen, Sprite } from "./models/multimedia/imagen.class.js";
 import { Sonido } from "./models/multimedia/sonido.class.js";
 
-let $ = (x) => document.querySelector(x);
+(function(){
+    let $ = (x) => document.querySelector(x);
+    window.$ = $;
 
-Environment.agregarFigura(new Figura({
-        tipo: "cuadrado",
-        transform: new Transform({
-            x: 500,
-            y: 100,
-            anchura: 20,
-            altura: 20,
-            relleno: "#000000"
-        }),
-        rigido: new Rigido()
-    }));
+    Environment.Figura = Figura;
+    Environment.Transform = Transform;
+    Environment.Rigido = Rigido;
+    Environment.Imagen = Imagen;
+    Environment.Sprite = Sprite;
+    Environment.Sonido = Sonido;
 
-Environment.agregarFigura(new Figura({
-        tipo: "cuadrado",
-        transform: new Transform({
-            x: 500,
-            y: 0,
-            anchura: 20,
-            altura: 20,
-            relleno: "#00CCCC"
-        }),
-        rigido: new Rigido(15)
-    }));
+    let $g = Environment;
 
-
-$("#imagen").onchange = function(e){
-    console.log("entro");
-    let img = new Image();
-    img.src = URL.createObjectURL(this.files[0]);
-    Environment.agregarFigura(new Figura({
-        tipo: "imagen",
-        transform: new Transform({
-            x: 0,
-            y: 0,
-            altura: 100,
-            anchura: 100,
-            imagen: new Imagen(
-                img, 
-                new Sprite(
-                    $("#rows").value - 1,
-                    $("#cols").value,
-                    $("#altura").value,
-                    $("#anchura").value,
-                    $("#velocidad").value
-                )
-            ),
-        }),
-        rigido: new Rigido()
-    }));
-};
-
-$("#audio").onchange = function(e){
-    let audio = new Audio();
-    audio.src = URL.createObjectURL(this.files[0]);
-    Environment.agregarFigura(new Figura({
-        tipo: "cuadrado",
-        transform: new Transform({
-            sonido: new Sonido({
-                src: audio,
-                activacion: 'colisionInversa'
-            }),
-            x: 500,
-            y: 0,
-            anchura: 20,
-            altura: 20,
-            relleno: "#00FF00"
-        }),
-        rigido: new Rigido()
-    }));
-};
+    window.$g = $g;
+})();
 
 Inicializar();
 
 window.requestAnimationFrame(Step);
-
-// requestAnimationFrame(() => {
-//     Dibujar();
-// });
