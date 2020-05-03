@@ -8,7 +8,7 @@ import { Sonido } from "./models/multimedia/sonido.class.js";
 
 (function(){
     let $ = (x) => document.querySelector(x);
-    window.$ = $;
+    window.$$ = $;
 
     Environment.Figura = Figura;
     Environment.Transform = Transform;
