@@ -95,9 +95,9 @@ function Inicializar() {
             }
             if (Tocando(pivote, figura, figura.tipo == 'circulo', false)) {
                 if (figura.tipo == 'circulo') {
-                    pivote.transform.x = figura.transform.x - (pivote.transform.anchura + (figura.transform.radio * 2)); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
+                    pivote.transform.x = figura.transform.x + (pivote.transform.anchura + (figura.transform.radio * 2)); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
                 } else {
-                    pivote.transform.x = figura.transform.x - pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+                    pivote.transform.x = figura.transform.x + pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
                 }
             }
         }
@@ -113,8 +113,6 @@ function Step(timestamp) {
 function IniciarAnimacion(){
     Inicializar();
     Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
-    console.log(Environment.backup);
-    
     requestId = window.requestAnimationFrame(Step);
 }
 

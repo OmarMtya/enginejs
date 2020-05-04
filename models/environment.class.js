@@ -44,8 +44,6 @@ class Environment {
     }
 
     static Copy(obj){
-        console.log(obj);
-        
         let clon = JSON.parse(JSON.stringify(obj));
 
         return new Figura({
@@ -64,6 +62,10 @@ class Environment {
             }),
             rigido: new Rigido(clon.rigido.valor, clon.rigido.sinColision)
         });
+    }
+
+    static GenerarId(){
+        return '_' + Math.random().toString(36).substr(2, 9);
     }
 }
 

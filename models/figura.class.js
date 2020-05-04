@@ -1,12 +1,16 @@
 import { Environment } from "./environment.class.js";
 import { Tocando } from "./utilidades.class.js";
 class Figura {
-    constructor({id, nombre, tipo, transform, rigido = null}){
-        this.id = id;
+    constructor({nombre, tipo, transform, rigido = null}){
+        this.id = Environment.GenerarId();
         this.tipo = tipo;
         this.transform = transform;
         this.rigido = rigido;
-        this.nombre = nombre;
+        if(nombre){
+            this.nombre = nombre;
+        }else{
+            this.nombre = `Figura ${Environment.figuras.length + 1}`;
+        }
     }
 
     afectarGravedad = function(){
@@ -35,7 +39,6 @@ class Figura {
         if (this.rigido.gravedadReiniciada) {
             this.rigido.gravedadReiniciada = false;
             this.rigido.colision = false;
-            
         }
 
         figuras.forEach((figura) => {
