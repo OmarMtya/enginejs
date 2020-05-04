@@ -108,12 +108,13 @@ function Step(timestamp) {
     if (!start) start = timestamp;
     Dibujar(false);
     requestId = window.requestAnimationFrame(Step);
-    console.log("Figuras:", Environment.figuras);
 }
 
 function IniciarAnimacion(){
-    Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
     Inicializar();
+    Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
+    console.log(Environment.backup);
+    
     requestId = window.requestAnimationFrame(Step);
 }
 
