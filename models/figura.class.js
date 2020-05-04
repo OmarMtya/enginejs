@@ -1,8 +1,12 @@
 import { Environment } from "./environment.class.js";
 import { Tocando } from "./utilidades.class.js";
 class Figura {
-    constructor({nombre, tipo, transform, rigido = null}){
-        this.id = Environment.GenerarId();
+    constructor({id, nombre, tipo, transform, rigido = null}){
+        if(id){
+            this.id = id;
+        }else{
+            this.id = Environment.GenerarId();
+        }
         this.tipo = tipo;
         this.transform = transform;
         this.rigido = rigido;

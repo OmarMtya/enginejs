@@ -9,6 +9,9 @@ let requestId;
  * @param {*} sinAvance - Calcular el siguiente paso
  */
 function Dibujar(sinAvance = true){
+    if(!sinAvance){
+        Inicializar();
+    }
     Environment.contador += 1;
     const c = Environment.canvas;
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
