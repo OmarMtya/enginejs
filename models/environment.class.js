@@ -1,3 +1,6 @@
+import { Figura } from './figura.class.js';
+import { Rigido } from './rigido.class.js';
+import { Transform } from './transform.class.js';
 class Environment {
     static canvas;
     static FPS = 60;
@@ -8,6 +11,7 @@ class Environment {
     static figuras = [];
     static contador = 0; // Contador de Frames registrados
     static audioGeneral;
+    static backup = [];
 
     /**
      * Función que inicializa el canvas mediante un container
@@ -37,6 +41,29 @@ class Environment {
 
     static AgregarFigura(figura){
         Environment.figuras.push(figura);
+    }
+
+    static Copy(obj){
+        console.log(obj);
+        
+        let clon = JSON.parse(JSON.stringify(obj));
+
+        return new Figura({
+            id: clon.id,
+            nombre: clon.nombre,
+            tipo: clon.tipo,
+            transform: new Transform({
+                x: clon.transform.x,
+                y: clon.transform.y,
+                anchura: clon.transform.anchura,
+                altura: clon.transform.altura,
+                relleno: clon.transform.relleno,
+                imagen: clon.transform.imagen,
+                radio: clon.transform.radio,
+                sonido: clon.transform.sonido
+            }),
+            rigido: new Rigido(clon.rigido.valor, clon.rigido.sinColision)
+        });
     }
 }
 

@@ -1,16 +1,18 @@
 import { Environment } from "./models/environment.class.js";
 import { Tocando } from "./models/utilidades.class.js";
 
-let start = null;
+let start;
+let requestId;
 
-function Dibujar(){
+/**
+ * Función que dibuja los objetos dentro del canvas
+ * @param {*} sinAvance - Calcular el siguiente paso
+ */
+function Dibujar(sinAvance = true){
     Environment.contador += 1;
     const c = Environment.canvas;
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
     c.beginPath(); // Importante limpiar las líneas ya creadas
-    
-
-
     
 
     Environment.figuras.forEach((figura)=>{ // Dibuja los objetos
@@ -36,16 +38,23 @@ function Dibujar(){
         c.stroke();
     });
 
+    if(sinAvance){
+        calcularSiguientePaso();
+    }
+    
+}
+
+function calcularSiguientePaso(){
     // Calcula el próximo movimiento
-    [...Environment.figuras].sort((a , b) => { // Ordenar por la Y, para evitar problemas de físicas. (...) se clona para no manipular el original
-        if(a.transform.y > b.transform.y){
+    [...Environment.figuras].sort((a, b) => { // Ordenar por la Y, para evitar problemas de físicas. (...) se clona para no manipular el original
+        if (a.transform.y > b.transform.y) {
             return -1;
         }
-        if(a.transform.y < b.transform.y){
+        if (a.transform.y < b.transform.y) {
             return 1;
         }
         return 0;
-    }) .forEach(figura => { // Por cada figura creada, se redibuja
+    }).forEach(figura => { // Por cada figura creada, se redibuja
         if (figura.rigido) {
             if (!figura.rigido.sinColision) { // Si está definido el objeto como que si puede detectar colisiones
                 figura.tocandoRigidos();
@@ -58,8 +67,6 @@ function Dibujar(){
             }
         }
     });
-
-    
 }
 
 function DibujarSprite(c, transform){
@@ -99,20 +106,27 @@ function Inicializar() {
 
 function Step(timestamp) {
     if (!start) start = timestamp;
-    var progress = timestamp - start;
-    Dibujar();
-    // if (progress < 2000) {
-        window.requestAnimationFrame(Step);
-    // }
+    Dibujar(true);
+    requestId = window.requestAnimationFrame(Step);
+    console.log("Figuras:", Environment.figuras);
 }
 
-function Animar(){
+function IniciarAnimacion(){
+    Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
     Inicializar();
-    window.requestAnimationFrame(Step);
+    requestId = window.requestAnimationFrame(Step);
+}
+
+function DetenerAnimacion(){
+    if(requestId){
+        window.cancelAnimationFrame(requestId);
+        requestId = undefined;
+        Environment.figuras = Environment.backup.map(x => Environment.Copy(x) );
+    }
 }
 
 function Error(invoker){
     console.error("EXISTE UN ERROR", invoker);
 }
 
-export { Error, Animar, Step }
+export { Error, IniciarAnimacion, DetenerAnimacion, Step, Dibujar }

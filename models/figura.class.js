@@ -15,8 +15,6 @@ class Figura {
     }
 
     tocandoFondo = function () {
-        console.log(Environment.altura);
-        
         let fondo;
         if(this.transform.imagen && this.transform.imagen.sprite){
             fondo = Environment.altura - (this.transform.imagen.sprite.altura); // Si es un sprite, tomar en cuenta el tamaño del sprite, no de la imagen
