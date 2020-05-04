@@ -38,7 +38,7 @@ function Dibujar(sinAvance = true){
         c.stroke();
     });
 
-    if(sinAvance){
+    if(!sinAvance){
         calcularSiguientePaso();
     }
     
@@ -106,7 +106,7 @@ function Inicializar() {
 
 function Step(timestamp) {
     if (!start) start = timestamp;
-    Dibujar(true);
+    Dibujar(false);
     requestId = window.requestAnimationFrame(Step);
     console.log("Figuras:", Environment.figuras);
 }
