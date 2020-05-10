@@ -46,7 +46,7 @@ class Environment {
     static Copy(obj){
         let clon = JSON.parse(JSON.stringify(obj));
 
-        return new Figura({
+        let figura = new Figura({
             id: clon.id,
             nombre: clon.nombre,
             tipo: clon.tipo,
@@ -60,8 +60,11 @@ class Environment {
                 radio: clon.transform.radio,
                 sonido: clon.transform.sonido
             }),
-            rigido: new Rigido(clon.rigido.valor, clon.rigido.sinColision)
         });
+        if(clon.rigido){
+            figura.rigido = new Rigido(clon.rigido.valor, clon.rigido.sinColision);
+        }
+        return figura;
     }
 
     static GenerarId(){
