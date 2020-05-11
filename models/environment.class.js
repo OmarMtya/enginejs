@@ -67,6 +67,9 @@ class Environment {
         if(obj.transform.imagen != null){
             figura.transform.imagen = obj.transform.imagen;
         }
+        if(obj.transform.sonido != null){
+            figura.transform.sonido = obj.transform.sonido;
+        }
         return figura;
     }
 

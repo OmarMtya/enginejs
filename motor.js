@@ -23,12 +23,13 @@ function Dibujar(sinAvance = true){
         switch (figura.tipo) {
             case "circulo": // En el circulo, el tamaño solamente se toma en cuenta la altura
                 c.fillStyle = transform.relleno;
-                c.fill();
                 c.arc(transform.x, transform.y, transform.radio, 0, 2 * Math.PI);
+                c.fill();
                 break;
             case "cuadrado":
                 c.fillStyle = transform.relleno;
                 c.fillRect(transform.x, transform.y, transform.anchura, transform.altura);
+                c.stroke();
                 break;
             case "imagen":
                 if(!transform.imagen){
@@ -46,7 +47,6 @@ function Dibujar(sinAvance = true){
                 }
                 break;
         }
-        c.stroke();
     });
 
     if(!sinAvance){
@@ -106,9 +106,13 @@ function Inicializar() {
             }
             if (Tocando(pivote, figura, figura.tipo == 'circulo', false)) {
                 if (figura.tipo == 'circulo') {
-                    pivote.transform.x = figura.transform.x + (pivote.transform.anchura + (figura.transform.radio * 2)); // Si es circulo lo empuja a la izquierda mas la anchura de ambos
+                    pivote.transform.x = figura.transform.x - (figura.transform.radio * 3);
                 } else {
-                    pivote.transform.x = figura.transform.x + pivote.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+                    if(pivote.tipo == 'circulo'){
+                        pivote.transform.x = (pivote.transform.x + pivote.transform.radio) + figura.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+                    }else{
+                        pivote.transform.x = pivote.transform.x + figura.transform.anchura; // Se empuja a la izquierda del punto de origen de la otra figura
+                    }
                 }
             }
         }
