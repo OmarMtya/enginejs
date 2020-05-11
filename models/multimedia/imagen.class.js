@@ -21,11 +21,11 @@ class Sprite {
      * @param {number} velocidad - Velocidad de reproducción
      */
     constructor(row, cols, altura, anchura, velocidad) {
-        this.row = row;
-        this.cols = cols;
-        this.altura = altura;
-        this.anchura = anchura;
-        this.velocidad = velocidad / (this.cols / velocidad); // La velocidad es igual a la cantidad de segundos que quiero que dure la animación. Esto es igual a lo que dura cada frame
+        this.row = parseInt(row);
+        this.cols = parseInt(cols);
+        this.altura = parseFloat(altura);
+        this.anchura = parseFloat(anchura);
+        this.velocidad = parseFloat(velocidad) / (this.cols / parseFloat(velocidad)); // La velocidad es igual a la cantidad de segundos que quiero que dure la animación. Esto es igual a lo que dura cada frame
         this.frame = { valor: 0, ultimo: null };
     }
 }
