@@ -31,6 +31,10 @@ function Dibujar(sinAvance = true){
                 c.fillRect(transform.x, transform.y, transform.anchura, transform.altura);
                 break;
             case "imagen":
+                if(!transform.imagen){
+                    console.error("Objeto tipo imagen no contiene una imagen");
+                    return;
+                }
                 if(transform.imagen.sprite){
                     DibujarSprite(c, transform);
                 }else{
