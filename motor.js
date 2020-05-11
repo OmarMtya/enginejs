@@ -34,7 +34,11 @@ function Dibujar(sinAvance = true){
                 if(transform.imagen.sprite){
                     DibujarSprite(c, transform);
                 }else{
-                    c.drawImage(transform.imagen.src, 0, 0, transform.imagen.src.width, transform.imagen.src.height, transform.x, transform.y, transform.anchura, transform.altura);
+                    try {
+                        c.drawImage(transform.imagen.src, 0, 0, transform.imagen.src.width, transform.imagen.src.height, transform.x, transform.y, transform.anchura, transform.altura);
+                    } catch (error) {
+                        console.error("La imagen ingresada no tiene formato de objeto tipo \"Image\"");
+                    }
                 }
                 break;
         }

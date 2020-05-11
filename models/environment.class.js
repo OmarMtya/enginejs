@@ -64,6 +64,9 @@ class Environment {
         if(clon.rigido){
             figura.rigido = new Rigido(clon.rigido.valor, clon.rigido.sinColision);
         }
+        if(obj.transform.imagen != null){
+            figura.transform.imagen = obj.transform.imagen;
+        }
         return figura;
     }
 
