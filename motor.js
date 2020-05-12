@@ -3,15 +3,17 @@ import { Tocando } from "./models/utilidades.class.js";
 
 let start;
 let requestId;
+let animando = false;
 
 /**
  * Función que dibuja los objetos dentro del canvas
  * @param {*} sinAvance - Calcular el siguiente paso
  */
 function Dibujar(sinAvance = true){
-    if(!sinAvance){
+    if(!sinAvance && !animando){
         Inicializar();
     }
+    animando = true;
     Environment.contador += 1;
     const c = Environment.canvas;
     c.clearRect(0, 0, Environment.anchura, Environment.altura); // Limpia el canvas
@@ -94,6 +96,7 @@ function DibujarSprite(c, transform){
  * Funcion que inicializa el canvas con reglas de superposición y otros
  */
 function Inicializar() {
+    console.log("entro");
 
     Environment.figuras.forEach((pivote, index) => { // Empieza el ordenamiento burbuja para mover a los objetos que se tocan al incio del renderizado
         if(index === Environment.figuras.length){
@@ -126,6 +129,8 @@ function Step(timestamp) {
 }
 
 function IniciarAnimacion(){
+    console.log("entro nonono");
+    
     Inicializar();
     Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
     requestId = window.requestAnimationFrame(Step);
@@ -136,6 +141,7 @@ function DetenerAnimacion(){
         window.cancelAnimationFrame(requestId);
         requestId = undefined;
         Environment.figuras = Environment.backup.map(x => Environment.Copy(x) );
+        animando = false;
     }
 }
 
