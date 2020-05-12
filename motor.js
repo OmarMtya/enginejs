@@ -118,6 +118,10 @@ function Inicializar() {
             }
         }
     });
+
+    Environment.figuras.filter((x)=> x.transform.sonido && x.transform.sonido.src && x.transform.sonido.activacion == 'inicial').forEach(objeto => {
+        objeto.transform.sonido.src.play();
+    });
 }
 
 function Step(timestamp) {
@@ -138,6 +142,9 @@ function DetenerAnimacion(){
         requestId = undefined;
         Environment.figuras = Environment.backup.map(x => Environment.Copy(x) );
         animando = false;
+        Environment.figuras.filter((x) => x.transform.sonido && x.transform.sonido.src && x.transform.sonido.activacion == 'inicial').forEach(objeto => {
+            objeto.transform.sonido.src.pause();
+        });
     }
 }
 

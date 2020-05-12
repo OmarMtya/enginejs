@@ -3,6 +3,7 @@ class Sonido{
         this.src = src;
         this.activacion = activacion;
         if(this.activacion == 'inicial'){
+            console.log("ENTRO");
             this.src.play();
         }
     }
