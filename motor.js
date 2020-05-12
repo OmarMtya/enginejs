@@ -96,8 +96,6 @@ function DibujarSprite(c, transform){
  * Funcion que inicializa el canvas con reglas de superposición y otros
  */
 function Inicializar() {
-    console.log("entro");
-
     Environment.figuras.forEach((pivote, index) => { // Empieza el ordenamiento burbuja para mover a los objetos que se tocan al incio del renderizado
         if(index === Environment.figuras.length){
             return;
@@ -129,8 +127,6 @@ function Step(timestamp) {
 }
 
 function IniciarAnimacion(){
-    console.log("entro nonono");
-    
     Inicializar();
     Environment.backup = Environment.figuras.map((x) => Environment.Copy(x) );
     requestId = window.requestAnimationFrame(Step);
@@ -145,8 +141,8 @@ function DetenerAnimacion(){
     }
 }
 
-function Error(invoker){
-    console.error("EXISTE UN ERROR", invoker);
+function Error(){
+    throw "EXISTE UN ERROR";
 }
 
 export { Error, IniciarAnimacion, DetenerAnimacion, Step, Dibujar }
