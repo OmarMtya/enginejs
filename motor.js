@@ -1,5 +1,5 @@
 import { Environment } from "./models/environment.class.js";
-import { Tocando } from "./models/utilidades.class.js";
+import { Tocando, detectarClickFigura } from "./models/utilidades.class.js";
 
 let start;
 let requestId;
@@ -55,6 +55,23 @@ function Dibujar(sinAvance = true){
         calcularSiguientePaso();
     }
     
+}
+
+function detectarClick(bindear = true){
+    if (bindear) {
+        Environment.canvasHTML.onclick = function (event) {
+            Environment.figuras.forEach(pivote => {
+                if (detectarClickFigura({
+                        x: event.offsetX,
+                        y: event.offsetY
+                    }, pivote)) {
+                    Environment.clickListener(pivote);
+                }
+            });
+        }
+    } else {
+        Environment.canvasHTML.onclick = function () {};
+    }
 }
 
 function calcularSiguientePaso(){
@@ -152,4 +169,11 @@ function Error(){
     throw "EXISTE UN ERROR";
 }
 
-export { Error, IniciarAnimacion, DetenerAnimacion, Step, Dibujar }
+export {
+    Error,
+    IniciarAnimacion,
+    DetenerAnimacion,
+    Step,
+    Dibujar,
+    detectarClick
+}

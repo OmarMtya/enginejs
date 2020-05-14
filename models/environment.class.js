@@ -12,6 +12,8 @@ class Environment {
     static contador = 0; // Contador de Frames registrados
     static audioGeneral;
     static backup = [];
+    static canvasHTML;
+    static clickListener = function() {};
 
     /**
      * Función que inicializa el canvas mediante un container
@@ -21,6 +23,7 @@ class Environment {
     static InitCanvas(canvas, container) {
         Environment.canvas = canvas.getContext("2d");
         Environment.container = container;
+        Environment.canvasHTML = canvas;
         Environment.altura = container.offsetHeight - 4;
         Environment.anchura = container.offsetWidth;
         canvas.setAttribute('height', Environment.altura);

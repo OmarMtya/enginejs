@@ -26,4 +26,19 @@ function Tocando (a, b, circulo, calcularGravedad = true) {
     }
 }
 
-export { Tocando }
+function detectarClickFigura(a, b){
+    let circulo = b.tipo == 'circulo';
+    if (circulo) {
+        return a.x - b.transform.radio < (b.transform.x) &&
+               a.x + b.transform.radio > b.transform.x &&
+               a.y - b.transform.radio < (b.transform.y) &&
+               a.y + b.transform.radio > (b.transform.y);
+    } else {
+        return a.x > b.transform.x && a.x < b.transform.x + b.transform.altura && a.y > b.transform.y && a.y < b.transform.y + b.transform.anchura;
+    }
+}
+
+export {
+    Tocando,
+    detectarClickFigura
+}
